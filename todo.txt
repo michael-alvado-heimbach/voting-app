@@ -1,0 +1,7 @@
+Google analytic
+
+firebase
+
+Login auth
+
+Sample CRUD using graphql

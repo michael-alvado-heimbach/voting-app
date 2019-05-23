@@ -1,0 +1,72 @@
+Styled Components
+package.json
+		"styled-components": "^4.2.0"
+  devDependencies
+    "babel-plugin-styled-components": "^1.10.0"
+
+For windows env
+  devDependencies
+		"cross-env": "^5.2.0",
+
+Delete folder/files
+  devDependencies
+		"rimraf": "^2.6.3",
+
+Service Worker
+  devDependencies
+		"sw-precache-webpack-plugin": "^0.11.5",
+
+Uglify source code
+  devDependencies
+		"uglifyjs-webpack-plugin": "^2.1.2"
+
+Using custom server express
+package.json
+		"express": "^4.16.4",
+
+Compressing text
+package.json
+		"compression": "^1.7.4",
+
+Testing libraries
+  devDependencies
+		"@babel/core": "^7.4.3",
+		"babel-jest": "^24.7.1",
+		"jest": "^24.7.1",
+		"react-testing-library": "^6.1.2",
+
+PropTypes for prop data type checking
+package.json
+		"prop-types": "^15.7.2",
+
+EsLint + prettier
+  devDependencies
+		"babel-eslint": "^10.0.1",
+		"eslint": "^5.16.0",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-config-airbnb-base": "^13.1.0",
+		"eslint-config-prettier": "^4.1.0",
+		"eslint-plugin-import": "^2.17.2",
+		"eslint-plugin-jest": "^22.4.1",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-react": "^7.12.4",
+		"eslint-plugin-react-hooks": "^1.6.0",
+		"eslint-plugin-prettier": "^3.0.1",
+		"prettier": "^1.17.0",
+
+Precommint
+  devDependencies
+		"pre-commit": "^1.2.2",
+		"lint-staged": "^8.1.5",
+		"husky": "^1.3.1",
+
+Material-ui
+package.json
+		"@material-ui/core": "^3.9.3",
+		"@material-ui/icons": "^3.0.2",
+		"jss": "^9.8.7",
+		"react-jss": "^8.6.1",
+
+next-font
+package.json
+		"next-fonts": "^0.17.0",

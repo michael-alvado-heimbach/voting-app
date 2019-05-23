@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - stable
+
+install:
+  - npm install
+  - npm install --save-dev codecov
+
+script:
+  - npm test
+  - ./node_modules/.bin/codecov --token="92f23fe9-fc4e-4815-8883-848342e9909d"
