@@ -1,78 +1,78 @@
 {
-	"name": "supplier-frontend",
-	"version": "1.0.0",
-	"description": "Frontend for supplier apps",
-	"repository": {
-		"type": "git",
-		"url": "https://michael_alvado_heimbach@bitbucket.org/michael_alvado_heimbach/supplier-frontend.git"
-	},
-	"author": "Michael Alvado",
-	"license": "MIT",
-	"scripts": {
-		"dev": "npm run lint && node --inspect server",
-		"build": "rimraf .next && next build",
-		"start": "npm run build && cross-env NODE_ENV=production node server",
-		"export": "rimraf out && npm run build && next export",
-		"test": "rimraf coverage && NODE_ENV=test jest --coverage",
-		"test:watch": "NODE_ENV=test jest --watch",
-		"lint": "eslint . --fix",
-		"lint:staged": "lint-staged",
-		"prettify": "prettier  --write '**/*.js'"
-	},
-	"lint-staged": {
-		"*.js": [
-			"npm run prettify",
-			"npm run lint",
-			"git add"
-		]
-	},
-	"pre-commit": "lint:staged",
-	"dependencies": {
-		"@material-ui/core": "^3.9.3",
-		"@material-ui/icons": "^3.0.2",
-		"compression": "^1.7.4",
-		"express": "^4.16.4",
-		"firebase": "^6.0.2",
-		"firebaseui": "^4.0.0",
-		"jss": "^9.8.7",
-		"next": "^8.1.0",
-		"prop-types": "^15.7.2",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
-		"react-firebaseui": "^3.1.2",
-		"react-jss": "^8.6.1",
-		"recharts": "^1.6.2",
-		"styled-components": "^4.2.0"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.4.3",
-		"babel-eslint": "^10.0.1",
-		"babel-jest": "^24.7.1",
-		"babel-plugin-styled-components": "^1.10.0",
-		"cross-env": "^5.2.0",
-		"eslint": "^5.16.0",
-		"eslint-config-airbnb": "^17.1.0",
-		"eslint-config-airbnb-base": "^13.1.0",
-		"eslint-config-prettier": "^4.2.0",
-		"eslint-plugin-import": "^2.17.2",
-		"eslint-plugin-jest": "^22.5.1",
-		"eslint-plugin-jsx-a11y": "^6.2.1",
-		"eslint-plugin-prettier": "^3.0.1",
-		"eslint-plugin-react": "^7.12.4",
-		"eslint-plugin-react-hooks": "^1.6.0",
-		"husky": "^2.1.0",
-		"jest": "^24.7.1",
-		"lint-staged": "^8.1.5",
-		"pre-commit": "^1.2.2",
-		"prettier": "^1.17.0",
-		"react-testing-library": "^7.0.0",
-		"rimraf": "^2.6.3",
-		"sw-precache-webpack-plugin": "^0.11.5",
-		"uglifyjs-webpack-plugin": "^2.1.2"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	}
+  "name": "heimbach-nextjs-boilerplate",
+  "version": "1.0.1",
+  "description": "My own minimalist nextjs boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michael-alvado-heimbach/heimbach-nextjs-boilerplate"
+  },
+  "author": "Michael Alvado",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npm run lint && node --inspect server",
+    "build": "rimraf .next && next build",
+    "start": "npm run build && cross-env NODE_ENV=production node server",
+    "export": "rimraf out && npm run build && next export",
+    "test": "rimraf coverage && NODE_ENV=test jest --coverage",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "lint": "eslint . --fix",
+    "lint:staged": "lint-staged",
+    "prettify": "prettier  --write '**/*.js'"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettify",
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint:staged",
+  "dependencies": {
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
+    "clsx": "^1.0.4",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
+    "firebase": "^6.0.2",
+    "firebaseui": "^4.0.0",
+    "next": "^8.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-firebaseui": "^3.1.2",
+    "react-jss": "^8.6.1",
+    "recharts": "^1.6.2",
+    "styled-components": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
+    "babel-plugin-styled-components": "^1.10.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.5.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "husky": "^2.1.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.17.0",
+    "react-testing-library": "^7.0.0",
+    "rimraf": "^2.6.3",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "uglifyjs-webpack-plugin": "^2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }

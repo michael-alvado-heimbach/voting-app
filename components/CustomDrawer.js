@@ -34,10 +34,10 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    paddingLeft: theme.spacing.unit * 3,
-    paddingRight: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit * 10,
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(10),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

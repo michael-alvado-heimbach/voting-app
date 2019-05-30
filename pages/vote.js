@@ -9,8 +9,8 @@ import Dialog from '../components/Dialog';
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     marginBottom: '2vh',
   },
 });
@@ -48,7 +48,7 @@ const Vote = props => {
           </div>
         )}
       </Paper>
-      <Grid container justify="center" spacing={16}>
+      <Grid container justify="center" spacing={2}>
         {!dialogResult &&
           data &&
           data.map(value => (

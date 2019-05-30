@@ -68,6 +68,7 @@ class CustomAppBar extends React.Component {
           onClick={() => {
             handleSignOut();
             this.handleMenuClose();
+            Router.push('/');
           }}
           data-testid="closeMenuAccountItem"
         >

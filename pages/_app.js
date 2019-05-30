@@ -1,26 +1,12 @@
 import App, { Container } from 'next/app';
 import Head from 'next/head';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import JssProvider from 'react-jss/lib/JssProvider';
+import { ThemeProvider } from '@material-ui/styles';
 import GlobalStyle from '../globalStyle';
 import Layout from '../components/Layout';
-import getPageContext from '../utils/getPageContext';
+import theme from '../utils/Theme';
 
 export default class MyApp extends App {
-  constructor() {
-    super();
-    this.pageContext = getPageContext();
-  }
-
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({ ctx });
-    }
-    return { pageProps };
-  }
-
   componentDidMount() {
     // For service worker registration
     if ('serviceWorker' in navigator) {
@@ -36,7 +22,7 @@ export default class MyApp extends App {
     // For material-ui
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
+    if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
@@ -53,21 +39,13 @@ export default class MyApp extends App {
         <Head>
           <title>Heimbach Nextjs Boilerplate</title>
         </Head>
-        <JssProvider
-          registry={this.pageContext.sheetsRegistry}
-          generateClassName={this.pageContext.generateClassName}
-        >
-          <MuiThemeProvider
-            theme={this.pageContext.theme}
-            sheetsManager={this.pageContext.sheetsManager}
-          >
-            <CssBaseline />
-            <Layout>
-              <Component pageContext={this.pageContext} {...pageProps} />
-              <GlobalStyle />
-            </Layout>
-          </MuiThemeProvider>
-        </JssProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>
+            <GlobalStyle />
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </Container>
     );
   }

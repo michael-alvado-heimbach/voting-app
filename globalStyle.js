@@ -1,14 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url("https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu72xKKTU1Kvnz.woff2") format('woff2');
-  }
-
   html,
   body {
     /* width: 100%; */
@@ -45,10 +37,6 @@ const GlobalStyle = createGlobalStyle`
 
   .mainContent {
     min-height: 85vh;
-  }
-
-  :focus {
-    outline:none;
   }
 `;
 

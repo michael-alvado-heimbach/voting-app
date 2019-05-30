@@ -1,9 +1,9 @@
 {
-  "name": "Next lighthouse",
-  "short_name": "Next LH",
+  "name": "iVote",
+  "short_name": "iVote",
   "icons": [
     {
-      "src": "/images/gear-512x512.png",
+      "src": "images/gear-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
