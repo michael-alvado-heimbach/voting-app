@@ -7,8 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import VoteIcon from '@material-ui/icons/HowToVote';
+import HomeIcon from '@material-ui/icons/Home';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Router from 'next/router';
 
@@ -53,53 +53,55 @@ const styles = theme => ({
 });
 
 const CustomDrawer = props => {
-  const { classes, children, open, drawerHandler } = props;
+  const { classes, children, open, drawerHandler, signStatus } = props;
   return (
     <div>
-      <Drawer
-        className={classes.drawer}
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        onClose={drawerHandler}
-      >
-        <div className={classes.drawerHeader} />
-        <div className={classes.menuTitle}>Supplier</div>
-        <Divider />
-        <List subheader={<ListSubheader>Menu</ListSubheader>}>
-          <ListItem
-            button
-            key="Dashboard"
-            onClick={() => {
-              drawerHandler();
-              Router.push('/');
-            }}
-            data-testid="menuDashboard"
-          >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-          <ListItem
-            button
-            key="Products"
-            onClick={() => {
-              drawerHandler();
-              Router.push('/about');
-            }}
-            data-testid="menuProduct"
-          >
-            <ListItemIcon>
-              <ShoppingBasketIcon />
-            </ListItemIcon>
-            <ListItemText primary="Products" />
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
+      {signStatus && (
+        <Drawer
+          className={classes.drawer}
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          onClose={drawerHandler}
+        >
+          <div className={classes.drawerHeader} />
+          <div className={classes.menuTitle}>iVote</div>
+          <Divider />
+          <List subheader={<ListSubheader>Menu</ListSubheader>}>
+            <ListItem
+              button
+              key="Home"
+              onClick={() => {
+                drawerHandler();
+                Router.push('/');
+              }}
+              data-testid="menuDashboard"
+            >
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+            <ListItem
+              button
+              key="Vote"
+              onClick={() => {
+                drawerHandler();
+                Router.push('/vote');
+              }}
+              data-testid="menuProduct"
+            >
+              <ListItemIcon>
+                <VoteIcon />
+              </ListItemIcon>
+              <ListItemText primary="Vote" />
+            </ListItem>
+          </List>
+          <Divider />
+        </Drawer>
+      )}
       <div
         tabIndex={0}
         role="button"
@@ -119,6 +121,7 @@ CustomDrawer.propTypes = {
   children: PropTypes.node.isRequired,
   open: PropTypes.bool.isRequired,
   drawerHandler: PropTypes.func.isRequired,
+  signStatus: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(CustomDrawer);

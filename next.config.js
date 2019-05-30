@@ -9,7 +9,7 @@ module.exports = {
   async exportPathMap() {
     return {
       '/': { page: '/' },
-      '/about': { page: '/about' },
+      '/vote': { page: '/vote' },
     };
   },
   // Minified using uglifyjs

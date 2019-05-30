@@ -46,7 +46,13 @@ class CustomAppBar extends React.Component {
   };
 
   render() {
-    const { classes, title, drawerHandler } = this.props;
+    const {
+      classes,
+      title,
+      drawerHandler,
+      handleSignOut,
+      signStatus,
+    } = this.props;
     const { anchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const renderMenu = (
@@ -59,7 +65,10 @@ class CustomAppBar extends React.Component {
         data-testid="closeMenuAccount"
       >
         <MenuItem
-          onClick={this.handleMenuClose}
+          onClick={() => {
+            handleSignOut();
+            this.handleMenuClose();
+          }}
           data-testid="closeMenuAccountItem"
         >
           Log Out
@@ -71,14 +80,17 @@ class CustomAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed" color="primary" className={classes.appBar}>
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-              onClick={drawerHandler}
-            >
-              <MenuIcon />
-            </IconButton>
+            {signStatus && (
+              <IconButton
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="Menu"
+                onClick={drawerHandler}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+            {!signStatus && <div style={{ width: '56px' }} />}
             <Typography
               variant="h6"
               color="inherit"
@@ -90,16 +102,18 @@ class CustomAppBar extends React.Component {
             >
               {title}
             </Typography>
-            <IconButton
-              aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-              aria-haspopup="true"
-              onClick={this.handleProfileMenuOpen}
-              data-testid="openMenuAccount"
-              color="inherit"
-              aria-label="accountMenu"
-            >
-              <AccountCircle />
-            </IconButton>
+            {signStatus && (
+              <IconButton
+                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                aria-haspopup="true"
+                onClick={this.handleProfileMenuOpen}
+                data-testid="openMenuAccount"
+                color="inherit"
+                aria-label="accountMenu"
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
           </Toolbar>
         </AppBar>
         {renderMenu}
@@ -112,6 +126,8 @@ CustomAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   drawerHandler: PropTypes.func.isRequired,
+  handleSignOut: PropTypes.func.isRequired,
+  signStatus: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles)(CustomAppBar);
