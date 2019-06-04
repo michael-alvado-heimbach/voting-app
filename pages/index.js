@@ -33,9 +33,8 @@ const Index = props => {
       });
       const resultData = Object.keys(result.data).map(key => ({
         name: key,
-        vote: result.data[key],
+        vote: result.data[key].totalCount,
       }));
-      console.log(resultData);
       setData(resultData);
     };
     fetchData();

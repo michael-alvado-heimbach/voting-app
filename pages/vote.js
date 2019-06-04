@@ -18,22 +18,27 @@ const styles = theme => ({
 
 const Vote = props => {
   const { classes } = props;
+  const voterName = props.name;
   const [dialogOpen, setDialogToggle] = useState(false);
   const [name, setName] = useState('');
   const [dialogResult, setDialogResult] = useState(false);
   const [data, setData] = useState([]);
-
+  const [vote, setVote] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios({
         method: 'get',
         url: `http://localhost:8080/vote?name=${props.name}`,
       });
-      const resultData = Object.keys(result.data).map((key, index) => ({
-        name: key,
-        id: index,
-      }));
-      setData(resultData);
+      if (result.data && result.data.alreadyVote) {
+        setVote(true);
+      } else {
+        const resultData = Object.keys(result.data).map((key, index) => ({
+          name: key,
+          id: index,
+        }));
+        setData(resultData);
+      }
     };
     fetchData();
   }, []);
@@ -50,24 +55,24 @@ const Vote = props => {
       url: `http://localhost:8080/vote`,
       data: {
         name: nameValue,
+        voterName,
       },
     });
   }, []);
-
   return (
     <div>
       <Paper className={classes.root} elevation={1}>
-        {!dialogResult && (
+        {(!vote || !dialogResult) && (
           <p align="center">Please choose one of your candidate</p>
         )}
-        {dialogResult && (
+        {(vote || dialogResult) && (
           <div align="center">
             <p>Thank you for your participation!</p>
           </div>
         )}
       </Paper>
       <Grid container justify="center" spacing={2}>
-        {!dialogResult &&
+        {(!vote || !dialogResult) &&
           data &&
           data.map(value => (
             <Grid item sm={3} xs={12} key={value.id}>
