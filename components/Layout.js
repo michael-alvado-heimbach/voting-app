@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 // import { render } from 'react-testing-library';
+import axios from 'axios';
 import AppBar from './CustomAppBar';
 import Drawer from './CustomDrawer';
 
@@ -42,6 +43,7 @@ class Layout extends React.Component {
     this.state = {
       isSignedIn: false,
       drawerOpen: false,
+      name: '',
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
@@ -49,9 +51,21 @@ class Layout extends React.Component {
   }
 
   componentDidMount() {
-    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user });
-    });
+    this.unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged(async user => {
+        if (user) {
+          await axios({
+            method: 'post',
+            url: 'http://localhost:8080/user',
+            data: {
+              name: user.displayName,
+            },
+          });
+          this.setState({ name: user.displayName });
+        }
+        this.setState({ isSignedIn: !!user });
+      });
   }
 
   componentWillUnmount() {
@@ -59,8 +73,14 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
-    const { isSignedIn, drawerOpen } = this.state;
+    const { isSignedIn, drawerOpen, name } = this.state;
+    const children =
+      isSignedIn &&
+      React.Children.map(this.props.children, child =>
+        React.cloneElement(child, {
+          name,
+        }),
+      );
     return (
       <div>
         {isSignedIn && (

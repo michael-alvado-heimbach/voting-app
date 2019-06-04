@@ -2,7 +2,8 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import VoteItem from '../components/VoteItem';
 import Dialog from '../components/Dialog';
 
@@ -15,26 +16,43 @@ const styles = theme => ({
   },
 });
 
-const data = [
-  { id: 1, name: 'Michael Alvado' },
-  { id: 2, name: 'Pamela Anderson' },
-  { id: 3, name: 'Nicolette Shea' },
-  { id: 4, name: 'Cawaiikanom' },
-  { id: 5, name: 'Tara Moon' },
-  { id: 6, name: 'Misty Knight' },
-  { id: 7, name: 'Poa Camilla' },
-  { id: 8, name: 'Alice Bambam' },
-];
-
 const Vote = props => {
   const { classes } = props;
   const [dialogOpen, setDialogToggle] = useState(false);
   const [name, setName] = useState('');
   const [dialogResult, setDialogResult] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(dialogResult);
-  });
+    const fetchData = async () => {
+      const result = await axios({
+        method: 'get',
+        url: `http://localhost:8080/vote?name=${props.name}`,
+      });
+      const resultData = Object.keys(result.data).map((key, index) => ({
+        name: key,
+        id: index,
+      }));
+      setData(resultData);
+    };
+    fetchData();
+  }, []);
+
+  const handleClickVote = useCallback(nameValue => {
+    setName(nameValue);
+    setDialogToggle(true);
+  }, []);
+
+  const handleAgreeVote = useCallback(async nameValue => {
+    setDialogResult(true);
+    await axios({
+      method: 'post',
+      url: `http://localhost:8080/vote`,
+      data: {
+        name: nameValue,
+      },
+    });
+  }, []);
 
   return (
     <div>
@@ -57,12 +75,10 @@ const Vote = props => {
                 tabIndex={0}
                 role="button"
                 onKeyDown={() => {
-                  setName(value.name);
-                  setDialogToggle(true);
+                  handleClickVote(value.name);
                 }}
                 onClick={() => {
-                  setName(value.name);
-                  setDialogToggle(true);
+                  handleClickVote(value.name);
                 }}
               >
                 <VoteItem name={value.name} />
@@ -78,7 +94,7 @@ const Vote = props => {
         title={`Are sure you want to vote ${name}?`}
         content="You can only vote once."
         agreeHandler={() => {
-          setDialogResult(true);
+          handleAgreeVote(name);
         }}
         disagreeHandler={() => {
           setDialogResult(false);
@@ -90,6 +106,7 @@ const Vote = props => {
 
 Vote.propTypes = {
   classes: PropTypes.object.isRequired,
+  name: PropTypes.string,
 };
 
 export default withStyles(styles)(Vote);
